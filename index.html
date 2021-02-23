@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+
+
+
+<ul class="list">
+	<li>1</li>
+	<li>2</li>
+	<li>3</li>
+
+
+</ul>	
+<button>Click</button>
+</body>	
+
+<script>
+	$(document).ready(function(){
+		$("button").click(function(){
+			var text = 	$("ul li").first().text();
+			$("<li>" + text + "</li>").appendTo("list");
+		});
+	});
+</script>
+</html>

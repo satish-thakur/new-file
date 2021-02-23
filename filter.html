@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>filter</title>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+<style>
+	.red {background: red;}
+	.green {background: green;}
+	.yellow {background: yellow;}
+	.black {background: black;}
+
+
+	.items-list li {
+		width: 20%;
+		height: 150px;
+		float: left;
+		margin: 2px 2px 0 0;
+		
+	}
+
+	.small {
+		width: 100px !important;
+	}
+
+	.circle {
+		border-radius: 100px;
+	}
+</style>
+
+<div class="content">
+	<form>
+		<select class="colors" value="">
+			<option data-value="all">All</option>
+			<option data-value="red">red</option>
+			<option data-value="green">green</option>
+			<option data-value="yellow">yellow</option>
+			<option data-value="black">black</option>
+		</select>
+
+		<select class="shapes">
+			<option data-value="all">All</option>
+			<option data-value="small">small</option>
+			<option data-value="large">large</option>
+			<option data-value="square">square</option>
+			<option data-value="circle">circle</option>
+		</select>
+	</form>
+
+	<div class="items">
+		<ul class="items-list">
+			<li class="red small"></li>
+			<li class="green large"></li>
+			<li class="red square"></li>
+			<li class="black circle"></li>
+			<li class="red circle"></li>
+			<li class="yellow circle"></li>
+			<li class="black large"></li>
+			<li class="red circle"></li>
+			<li class="yellow large"></li>
+			<li class="green square"></li>
+			<li class="yellow small"></li>
+			<li class="red small"></li>
+			<li class="black large"></li>
+			<li class="green small"></li>
+			<li class="green circle"></li>
+			<li class="black small"></li>
+			<li class="black square"></li>
+		</ul>
+	</div>
+</div>
+
+</body>
+
+<script>
+	$(document).ready(function(){
+		$("form .colors").change(function(){
+			let selected_color = $(this).val();
+			
+			let current_shape = $("form .shapes").val();
+
+			$(".items-list li").each(function(){
+				
+				if($(this).hasClass(selected_color) == true && $(this).hasClass(current_shape) == true){
+					$("li").not("." + selected_color).hide();
+					$(this).show();					
+				} else if (selected_color == 'All'){
+					$(this).show();
+				}else {
+					$(this).hide();
+				}
+
+			});
+
+
+		});
+
+
+		$("form .shapes").change(function(){
+
+			let selected_shape = $(this).val();
+			let current_color = $("form .colors").val();
+
+			$(".items-list li").each(function(){
+
+				if($(this).hasClass(selected_shape) == true && $(this).hasClass(current_color) == true){
+
+					$("li").not("." + selected_shape).hide();
+					$(this).show();
+
+				} else if (selected_shape == 'All'){
+					$(this).show();
+				}else {
+					$(this).hide();
+				}
+
+
+
+			});
+		});
+
+	});
+</script>
+</html>
