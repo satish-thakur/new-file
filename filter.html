@@ -28,6 +28,11 @@
 	.circle {
 		border-radius: 100px;
 	}
+
+	.large {
+		width:30% !important;
+		height: 300px !important;
+	}
 </style>
 
 <div class="content">
@@ -80,21 +85,28 @@
 			let selected_color = $(this).val();
 			
 			let current_shape = $("form .shapes").val();
-
+			
+			
 			$(".items-list li").each(function(){
 				
-				if($(this).hasClass(selected_color) == true && $(this).hasClass(current_shape) == true){
+				if($(this).hasClass(selected_color) == true && current_shape == 'All'){
 					$("li").not("." + selected_color).hide();
-					$(this).show();					
-				} else{
-					$(this).hide();
+					$("." + selected_color).show();								
+				} else if($(this).hasClass(selected_color) == true && current_shape != 'All') {
+
+					$("li").not("." + selected_color+"." + current_shape).hide();
+					$("." + selected_color+"."+current_shape).show();	
+					
+				} else if(selected_color == 'All' && current_shape == 'All'){
+					$('li').show();
+				} else if(selected_color == 'All' && current_shape != 'All'){
+					$('.'+current_shape).show();
 				}
 
 			});
 
 
 		});
-
 
 		$("form .shapes").change(function(){
 
@@ -103,20 +115,24 @@
 
 			$(".items-list li").each(function(){
 
-				if($(this).hasClass(selected_shape) == true && $(this).hasClass(current_color) == true){
-
+				if($(this).hasClass(selected_shape) == true && current_color == 'All'){
 					$("li").not("." + selected_shape).hide();
-					$(this).show();
-
-				} else {
-					$(this).hide();
-				}
-
-
+					$("." + selected_shape).show();				
+				} else if($(this).hasClass(selected_shape) == true && current_color != 'All'){
+					$("li").not("." + selected_shape+"." + current_color).hide();
+					$("." + selected_shape+"."+current_color).show();	
+				} else if(selected_shape == 'All' && current_color == 'All'){
+					$('li').show();
+				} else if(selected_shape == 'All' && current_color != 'All'){
+					$('li').not('.'+current_color).hide();
+					$('.'+current_color).show();
+					
+				} 
 
 			});
 		});
-
 	});
+
+
 </script>
 </html>
